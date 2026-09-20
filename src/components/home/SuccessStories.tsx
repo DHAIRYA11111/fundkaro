@@ -45,7 +45,7 @@ export function SuccessStories() {
                   <div>
                     <Quote className="text-brand-200 fill-brand-50 mb-4" size={40} />
                     <p className="text-slate-700 font-medium italic text-lg leading-relaxed mb-6 line-clamp-4">
-                      &ldquo;Thanks to the amazing backers on FundKaro, we brought {campaign.title} to life faster than we ever imagined. The Indian startup ecosystem is incredible.&rdquo;
+                      &ldquo;Thanks to the amazing backers on ChandaDedo, we brought {campaign.title} to life faster than we ever imagined. The Indian startup ecosystem is incredible.&rdquo;
                     </p>
                   </div>
                   

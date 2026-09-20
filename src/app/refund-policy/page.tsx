@@ -55,7 +55,7 @@ export default function RefundPolicyPage() {
               <div className="relative">
                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-brand-300 rounded-full border-4 border-white"></div>
                 <h4 className="font-bold text-slate-900">Processing (Day 1-2)</h4>
-                <p className="text-sm text-slate-600 mt-1">FundKaro instructs the escrow trustee to reverse all transactions.</p>
+                <p className="text-sm text-slate-600 mt-1">ChandaDedo instructs the escrow trustee to reverse all transactions.</p>
               </div>
               <div className="relative">
                 <div className="absolute -left-[41px] top-1 w-5 h-5 bg-brand-300 rounded-full border-4 border-white"></div>
@@ -105,7 +105,7 @@ export default function RefundPolicyPage() {
               </div>
               <div>
                 <h4 className="font-bold text-slate-900">The creator hasn&apos;t delivered my reward. Can I get a refund?</h4>
-                <p className="text-slate-600 mt-1 text-sm">Once a campaign is successfully funded, the funds belong to the creator. Refunds for undelivered rewards must be requested directly from the creator. FundKaro cannot guarantee fulfillment or force a refund post-disbursement.</p>
+                <p className="text-slate-600 mt-1 text-sm">Once a campaign is successfully funded, the funds belong to the creator. Refunds for undelivered rewards must be requested directly from the creator. ChandaDedo cannot guarantee fulfillment or force a refund post-disbursement.</p>
               </div>
               <div>
                 <h4 className="font-bold text-slate-900">What if my original payment method is closed?</h4>
@@ -115,7 +115,7 @@ export default function RefundPolicyPage() {
           </section>
 
           <p className="text-center text-slate-500 mt-12">
-            Still have questions? Contact our support team at <a href="mailto:support@fundkaro.in" className="text-brand-600 font-medium hover:underline">support@fundkaro.in</a>
+            Still have questions? Contact our support team at <a href="mailto:support@chandadedo.in" className="text-brand-600 font-medium hover:underline">support@chandadedo.in</a>
           </p>
         </div>
       </div>

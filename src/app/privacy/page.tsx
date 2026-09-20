@@ -30,7 +30,7 @@ export default function PrivacyPage() {
           {/* Content */}
           <div className="md:w-3/4 prose prose-slate max-w-none prose-headings:text-slate-900 prose-a:text-brand-600">
             <p className="lead text-lg text-slate-600 mb-8">
-              At FundKaro, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our platform.
+              At ChandaDedo, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our platform.
             </p>
 
             <section id="collect" className="mb-10 scroll-mt-24">
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold mb-4">2. How We Use Your Information</h2>
               <p>We use your information to:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
-                <li>Provide and maintain the FundKaro platform.</li>
+                <li>Provide and maintain the ChandaDedo platform.</li>
                 <li>Process transactions and pledges.</li>
                 <li>Verify creator identities to prevent fraud.</li>
                 <li>Communicate with you regarding campaigns, account updates, and support.</li>
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
 
             <section id="contact" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">10. Contact Us</h2>
-              <p>If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact our Grievance Officer at privacy@fundkaro.in.</p>
+              <p>If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact our Grievance Officer at privacy@chandadedo.in.</p>
             </section>
           </div>
         </div>

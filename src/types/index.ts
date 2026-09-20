@@ -1,5 +1,5 @@
 // ============================================================
-// FundKaro — Core Type Definitions
+// ChandaDedo — Core Type Definitions
 // ============================================================
 
 export interface User {

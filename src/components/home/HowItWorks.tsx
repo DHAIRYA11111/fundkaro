@@ -33,7 +33,7 @@ export function HowItWorks() {
             Simple & Transparent
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            How FundKaro Works
+            How ChandaDedo Works
           </h2>
           <p className="text-slate-600 text-base md:text-lg">
             Empowering passionate founders and innovative backers across India in three seamless steps.

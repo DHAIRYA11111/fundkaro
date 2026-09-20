@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
 export async function DELETE() {
   const response = NextResponse.json({ success: true });
-  response.cookies.set("fundkaro_token", "", {
+  response.cookies.set("chandadedo_token", "", {
     httpOnly: true,
     maxAge: 0,
     path: "/",

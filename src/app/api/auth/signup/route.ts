@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     const token = signToken({ userId: user.id, email: user.email, role: user.role });
 
     const response = NextResponse.json({ user, success: true }, { status: 201 });
-    response.cookies.set("fundkaro_token", token, {
+    response.cookies.set("chandadedo_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

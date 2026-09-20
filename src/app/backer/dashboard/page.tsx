@@ -146,7 +146,7 @@ export default function BackerDashboard() {
 
             <div className="bg-brand-50 rounded-2xl p-6 border border-brand-100 text-center">
               <h3 className="font-bold text-brand-800 mb-2">Have an idea?</h3>
-              <p className="text-sm text-brand-600 mb-4">Turn your own ideas into reality with FundKaro.</p>
+              <p className="text-sm text-brand-600 mb-4">Turn your own ideas into reality with ChandaDedo.</p>
               <Link href="/start" className="btn-brand-primary w-full py-2.5 text-sm shadow-sm">
                 Start a Project
               </Link>

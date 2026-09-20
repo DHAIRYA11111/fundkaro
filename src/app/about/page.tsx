@@ -24,16 +24,16 @@ export default function AboutPage() {
 
       {/* Story Section */}
       <section className="py-20 px-4 max-w-3xl mx-auto w-full">
-        <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">The FundKaro Story</h2>
+        <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">The ChandaDedo Story</h2>
         <div className="prose prose-lg text-slate-600 space-y-6">
           <p>
-            FundKaro was born out of a simple observation: India has no shortage of brilliant ideas, but there is a massive gap in early-stage funding. Traditional VC routes are often inaccessible to first-time founders, and bank loans require collateral that many creators simply don&apos;t have.
+            ChandaDedo was born out of a simple observation: India has no shortage of brilliant ideas, but there is a massive gap in early-stage funding. Traditional VC routes are often inaccessible to first-time founders, and bank loans require collateral that many creators simply don&apos;t have.
           </p>
           <p>
             We realized that the power to fund the next big Indian startup shouldn&apos;t lie just in boardrooms in Bengaluru or Mumbai. It should lie with the people. By building a robust, transparent, and trustworthy crowdfunding platform tailored for the Indian ecosystem, we aim to bridge this gap.
           </p>
           <p>
-            Whether it&apos;s a revolutionary D2C consumer brand, a deep-tech hardware prototype, or an AI tool solving local problems, FundKaro empowers entrepreneurs to validate their ideas and raise capital directly from early adopters who believe in their vision.
+            Whether it&apos;s a revolutionary D2C consumer brand, a deep-tech hardware prototype, or an AI tool solving local problems, ChandaDedo empowers entrepreneurs to validate their ideas and raise capital directly from early adopters who believe in their vision.
           </p>
         </div>
       </section>
@@ -120,7 +120,7 @@ export default function AboutPage() {
       <section className="py-24 px-4 text-center max-w-4xl mx-auto w-full">
         <h2 className="text-4xl font-bold text-slate-900 mb-6">Ready to bring your idea to life?</h2>
         <p className="text-xl text-slate-600 mb-10">
-          Join the movement and start your crowdfunding journey with FundKaro today.
+          Join the movement and start your crowdfunding journey with ChandaDedo today.
         </p>
         <Link href="/start" className="btn-brand-primary px-8 py-4 text-lg shadow-lg shadow-brand-500/25">
           <span>Start a Campaign</span>

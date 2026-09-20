@@ -122,7 +122,7 @@ export default function TrustAndSafetyPage() {
           <div className="space-y-4 mb-8">
             <div className="flex items-center gap-3 text-sm font-medium text-slate-700">
               <FileText className="w-5 h-5 text-slate-500" />
-              Email: trust@fundkaro.in
+              Email: trust@chandadedo.in
             </div>
           </div>
           <button className="bg-white border-2 border-brand-600 text-brand-600 font-bold py-3 px-6 rounded-lg hover:bg-brand-50 transition-colors w-full">

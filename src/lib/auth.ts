@@ -44,7 +44,7 @@ export async function getCurrentUser(request: Request) {
   if (authHeader?.startsWith("Bearer ")) {
     token = authHeader.slice(7);
   } else if (cookieHeader) {
-    const match = cookieHeader.match(/fundkaro_token=([^;]+)/);
+    const match = cookieHeader.match(/chandadedo_token=([^;]+)/);
     if (match) token = match[1];
   }
 

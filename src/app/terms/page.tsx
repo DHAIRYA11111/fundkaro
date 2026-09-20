@@ -35,13 +35,13 @@ export default function TermsPage() {
           <div className="md:w-3/4 prose prose-slate max-w-none prose-headings:text-slate-900 prose-a:text-brand-600">
             <section id="acceptance" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">1. Acceptance of Terms</h2>
-              <p>Welcome to FundKaro. By accessing or using our platform, website, and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+              <p>Welcome to ChandaDedo. By accessing or using our platform, website, and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
             </section>
 
             <section id="definitions" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">2. Definitions</h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Platform:</strong> The FundKaro website and associated services.</li>
+                <li><strong>Platform:</strong> The ChandaDedo website and associated services.</li>
                 <li><strong>Creator:</strong> A user who creates a campaign to raise funds.</li>
                 <li><strong>Backer:</strong> A user who pledges money to a campaign.</li>
                 <li><strong>Campaign:</strong> A fundraising project created on the Platform.</li>
@@ -52,7 +52,7 @@ export default function TermsPage() {
 
             <section id="accounts" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">3. Account Registration</h2>
-              <p>You must be at least 18 years old to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. FundKaro reserves the right to suspend or terminate accounts that provide false information or violate these terms.</p>
+              <p>You must be at least 18 years old to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. ChandaDedo reserves the right to suspend or terminate accounts that provide false information or violate these terms.</p>
             </section>
 
             <section id="creators" className="mb-10 scroll-mt-24">
@@ -67,7 +67,7 @@ export default function TermsPage() {
 
             <section id="funding" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">6. Funding Models</h2>
-              <p>FundKaro offers two funding models:</p>
+              <p>ChandaDedo offers two funding models:</p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li><strong>All-or-Nothing:</strong> The Creator only receives funds if the Campaign meets or exceeds its funding goal by the deadline. Otherwise, Backers are fully refunded.</li>
                 <li><strong>Flexible:</strong> The Creator receives all funds raised, regardless of whether the goal is met, and is expected to fulfill Rewards to the best of their ability with the available funds.</li>
@@ -76,7 +76,7 @@ export default function TermsPage() {
 
             <section id="fees" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">7. Fees & Payments</h2>
-              <p>Creating an account is free. If a Campaign is successful, FundKaro charges a platform fee (typically 5%) plus payment processing fees. These fees are deducted from the total funds raised before they are transferred to the Creator. Backers are not charged any additional fees by FundKaro beyond their pledged amount.</p>
+              <p>Creating an account is free. If a Campaign is successful, ChandaDedo charges a platform fee (typically 5%) plus payment processing fees. These fees are deducted from the total funds raised before they are transferred to the Creator. Backers are not charged any additional fees by ChandaDedo beyond their pledged amount.</p>
             </section>
 
             <section id="escrow" className="mb-10 scroll-mt-24">
@@ -86,7 +86,7 @@ export default function TermsPage() {
 
             <section id="ip" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">9. Intellectual Property</h2>
-              <p>Creators retain ownership of their content. By submitting content to FundKaro, Creators grant us a worldwide, non-exclusive, royalty-free license to use, display, and distribute the content for the purpose of operating and promoting the Platform.</p>
+              <p>Creators retain ownership of their content. By submitting content to ChandaDedo, Creators grant us a worldwide, non-exclusive, royalty-free license to use, display, and distribute the content for the purpose of operating and promoting the Platform.</p>
             </section>
 
             <section id="prohibited" className="mb-10 scroll-mt-24">
@@ -96,12 +96,12 @@ export default function TermsPage() {
 
             <section id="disputes" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">11. Dispute Resolution</h2>
-              <p>FundKaro is not a party to the contract between Creators and Backers. We may try to mediate disputes, but we have no obligation to do so. Legal disputes must be resolved directly between the Creator and the Backer.</p>
+              <p>ChandaDedo is not a party to the contract between Creators and Backers. We may try to mediate disputes, but we have no obligation to do so. Legal disputes must be resolved directly between the Creator and the Backer.</p>
             </section>
 
             <section id="liability" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">12. Limitation of Liability</h2>
-              <p>FundKaro provides the platform &quot;as is&quot;. We do not guarantee that Campaigns will be successful or that Creators will deliver Rewards. We are not liable for any damages arising from your use of the Platform.</p>
+              <p>ChandaDedo provides the platform &quot;as is&quot;. We do not guarantee that Campaigns will be successful or that Creators will deliver Rewards. We are not liable for any damages arising from your use of the Platform.</p>
             </section>
 
             <section id="governing" className="mb-10 scroll-mt-24">
@@ -111,7 +111,7 @@ export default function TermsPage() {
 
             <section id="contact" className="mb-10 scroll-mt-24">
               <h2 className="text-2xl font-bold mb-4">14. Contact Information</h2>
-              <p>If you have any questions about these Terms, please contact us at legal@fundkaro.in.</p>
+              <p>If you have any questions about these Terms, please contact us at legal@chandadedo.in.</p>
             </section>
           </div>
         </div>

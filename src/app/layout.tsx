@@ -7,12 +7,12 @@ import Footer from "@/components/layout/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FundKaro — Fund the Next Big Indian Innovation",
+  title: "ChandaDedo — Fund the Next Big Indian Innovation",
   description: "Indian startup crowdfunding platform to discover and fund innovative ideas.",
   openGraph: {
-    title: "FundKaro — Fund the Next Big Indian Innovation",
+    title: "ChandaDedo — Fund the Next Big Indian Innovation",
     description: "Indian startup crowdfunding platform to discover and fund innovative ideas.",
-    siteName: "FundKaro",
+    siteName: "ChandaDedo",
   },
 };
 

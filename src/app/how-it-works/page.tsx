@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "What is FundKaro?",
-    a: "FundKaro is India's premier crowdfunding platform designed to help startups, creators, and innovators raise capital directly from the community."
+    q: "What is ChandaDedo?",
+    a: "ChandaDedo is India's premier crowdfunding platform designed to help startups, creators, and innovators raise capital directly from the community."
   },
   {
     q: "How do I back a project?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "What happens if a campaign doesn't reach its goal?",
-    a: "FundKaro uses an 'all-or-nothing' model for most campaigns. If the funding goal isn't met by the deadline, all backers receive a 100% automatic refund within 5-7 business days."
+    a: "ChandaDedo uses an 'all-or-nothing' model for most campaigns. If the funding goal isn't met by the deadline, all backers receive a 100% automatic refund within 5-7 business days."
   },
   {
     q: "How do refunds work?",
@@ -29,14 +29,14 @@ const faqs = [
   },
   {
     q: "What if a creator doesn't deliver?",
-    a: "While FundKaro requires KYC and verifies creators, backing a project is not a guaranteed purchase. It's an investment in an idea. We hold creators accountable through milestones, but there is always a risk the project may fail to deliver."
+    a: "While ChandaDedo requires KYC and verifies creators, backing a project is not a guaranteed purchase. It's an investment in an idea. We hold creators accountable through milestones, but there is always a risk the project may fail to deliver."
   },
   {
     q: "Can I back campaigns from outside India?",
-    a: "Currently, FundKaro only accepts payments in INR from Indian bank accounts and cards. We plan to support international payments soon."
+    a: "Currently, ChandaDedo only accepts payments in INR from Indian bank accounts and cards. We plan to support international payments soon."
   },
   {
-    q: "What fees does FundKaro charge?",
+    q: "What fees does ChandaDedo charge?",
     a: "For creators, we charge a 5% platform fee + 2% payment gateway fee (+ GST) only on successfully funded campaigns. Backers pay no extra fees."
   },
   {
@@ -64,8 +64,8 @@ const faqs = [
     a: "Yes, you can cancel or change your pledge at any time before the campaign ends."
   },
   {
-    q: "Is FundKaro regulated?",
-    a: "Yes, FundKaro complies with all relevant RBI guidelines regarding payment aggregation and escrow mechanisms for crowdfunding."
+    q: "Is ChandaDedo regulated?",
+    a: "Yes, ChandaDedo complies with all relevant RBI guidelines regarding payment aggregation and escrow mechanisms for crowdfunding."
   },
   {
     q: "What payment methods are accepted?",
@@ -90,7 +90,7 @@ export default function HowItWorksPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-bold mb-6 tracking-tight"
           >
-            How FundKaro Works
+            How ChandaDedo Works
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -243,7 +243,7 @@ export default function HowItWorksPage() {
         <div className="container mx-auto w-full max-w-3xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-slate-600">Everything you need to know about FundKaro.</p>
+            <p className="text-lg text-slate-600">Everything you need to know about ChandaDedo.</p>
           </div>
 
           <div className="space-y-4">

@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
                 <Rocket className="h-5 w-5" />
               </div>
-              <span className="font-extrabold text-2xl text-white tracking-tight">FundKaro</span>
+              <span className="font-extrabold text-2xl text-white tracking-tight">ChandaDedo</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               India&apos;s dedicated rewards-based startup crowdfunding platform. Backing the founders shaping tomorrow.
@@ -72,7 +72,7 @@ export default function Footer() {
         {/* Newsletter Row */}
         <div className="border-t border-slate-800 py-8 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h4 className="text-white font-bold mb-1">Subscribe to FundKaro Weekly</h4>
+            <h4 className="text-white font-bold mb-1">Subscribe to ChandaDedo Weekly</h4>
             <p className="text-xs text-slate-400">Curated breakthrough startups delivered to your inbox every Thursday.</p>
           </div>
           <form className="flex w-full md:w-auto max-w-md gap-2" onSubmit={(e) => e.preventDefault()}>
@@ -93,7 +93,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-800/80 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© 2026 FundKaro Technologies Pvt. Ltd. Proudly built for India 🇮🇳</p>
+          <p>© 2026 ChandaDedo Technologies Pvt. Ltd. Proudly built for India 🇮🇳</p>
           <div className="flex items-center gap-6">
             <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
             <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>

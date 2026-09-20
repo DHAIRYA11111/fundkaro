@@ -17,7 +17,7 @@ export async function createRazorpayOrder(params: CreateOrderParams) {
     if (
       process.env.RAZORPAY_KEY_ID &&
       process.env.RAZORPAY_KEY_SECRET &&
-      !process.env.RAZORPAY_KEY_ID.includes("FundKaro12345")
+      !process.env.RAZORPAY_KEY_ID.includes("ChandaDedo12345")
     ) {
       const order = await razorpay.orders.create({
         amount: Math.round(params.amount * 100), // convert ₹ to paise

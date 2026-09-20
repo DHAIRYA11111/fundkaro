@@ -72,7 +72,7 @@ export default function SignUpPage() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-3xl font-extrabold text-brand-600 mb-2">
-            FundKaro
+            ChandaDedo
           </Link>
           <h1 className="text-2xl font-bold text-slate-900">Create your account</h1>
           <p className="text-slate-500 mt-2 text-sm">Join India&apos;s fastest growing startup crowdfunding platform.</p>

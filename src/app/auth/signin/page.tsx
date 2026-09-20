@@ -54,9 +54,9 @@ export default function SignInPage() {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-3xl font-extrabold text-brand-600 mb-2">
-            FundKaro
+            ChandaDedo
           </Link>
-          <h1 className="text-2xl font-bold text-slate-900">Sign in to FundKaro</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Sign in to ChandaDedo</h1>
           <p className="text-slate-500 mt-2 text-sm">Welcome back! Access your campaigns & pledges.</p>
         </div>
 
@@ -76,14 +76,14 @@ export default function SignInPage() {
           <div className="flex gap-2">
             <button
               type="button"
-              onClick={() => handleDemoLogin("arjun@fundkaro.in", "Creator@1234")}
+              onClick={() => handleDemoLogin("arjun@chandadedo.in", "Creator@1234")}
               className="flex-1 text-xs py-1.5 px-2 bg-white rounded-lg border border-brand-200 hover:bg-brand-100/60 font-medium text-slate-700 transition-colors"
             >
               Demo Creator
             </button>
             <button
               type="button"
-              onClick={() => handleDemoLogin("ravi@fundkaro.in", "Backer@1234")}
+              onClick={() => handleDemoLogin("ravi@chandadedo.in", "Backer@1234")}
               className="flex-1 text-xs py-1.5 px-2 bg-white rounded-lg border border-brand-200 hover:bg-brand-100/60 font-medium text-slate-700 transition-colors"
             >
               Demo Backer

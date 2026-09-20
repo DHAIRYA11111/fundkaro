@@ -101,7 +101,7 @@ export default function StartCampaignPage() {
           </div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Campaign Published! 🚀</h2>
           <p className="text-slate-600 mb-2 text-sm">
-            <strong className="text-slate-900">{createdCampaign?.title}</strong> is now live on the FundKaro platform.
+            <strong className="text-slate-900">{createdCampaign?.title}</strong> is now live on the ChandaDedo platform.
           </p>
           <p className="text-slate-500 mb-8 text-xs">Your campaign is indexed and ready to accept pledges via RBI-compliant escrow.</p>
           

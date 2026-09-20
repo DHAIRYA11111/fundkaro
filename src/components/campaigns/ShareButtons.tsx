@@ -27,7 +27,7 @@ export default function ShareButtons({ title, className }: ShareButtonsProps) {
     }
   };
 
-  const shareText = `Check out ${title} on FundKaro!`;
+  const shareText = `Check out ${title} on ChandaDedo!`;
 
   return (
     <div className={cn("flex items-center gap-3", className)}>

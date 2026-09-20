@@ -92,12 +92,12 @@ function PledgeContent() {
           key: orderData.keyId,
           amount: orderData.amount,
           currency: orderData.currency || "INR",
-          name: "FundKaro",
+          name: "ChandaDedo",
           description: `Pledge for ${campaign.title}`,
           order_id: orderData.orderId,
           prefill: {
             name: shipping.fullName || orderData.userName || "Backer",
-            email: orderData.userEmail || "backer@fundkaro.in",
+            email: orderData.userEmail || "backer@chandadedo.in",
             contact: shipping.phone || "9876543210",
           },
           theme: { color: "#ea580c" },
@@ -615,7 +615,7 @@ function PledgeContent() {
             )}
 
             <div className="text-xs text-slate-500 pt-1">
-              By confirming, you agree to FundKaro&apos;s <Link href="/terms" className="text-brand-600 font-semibold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-brand-600 font-semibold hover:underline">Privacy Policy</Link>.
+              By confirming, you agree to ChandaDedo&apos;s <Link href="/terms" className="text-brand-600 font-semibold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-brand-600 font-semibold hover:underline">Privacy Policy</Link>.
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -704,7 +704,7 @@ function PledgeContent() {
               </h3>
               <div className="flex justify-center gap-3">
                 <a 
-                  href={`https://wa.me/?text=${encodeURIComponent(`I just backed ${campaign.title} on FundKaro! Check it out: ${typeof window !== 'undefined' ? window.location.origin : ''}/campaigns/${campaign.slug}`)}`}
+                  href={`https://wa.me/?text=${encodeURIComponent(`I just backed ${campaign.title} on ChandaDedo! Check it out: ${typeof window !== 'undefined' ? window.location.origin : ''}/campaigns/${campaign.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-xs"
@@ -712,7 +712,7 @@ function PledgeContent() {
                   <Smartphone className="w-3.5 h-3.5" /> WhatsApp
                 </a>
                 <a 
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Proud to support ${campaign.title} on FundKaro! Back Indian startups:`)}&url=${encodeURIComponent(`${typeof window !== 'undefined' ? window.location.origin : ''}/campaigns/${campaign.slug}`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Proud to support ${campaign.title} on ChandaDedo! Back Indian startups:`)}&url=${encodeURIComponent(`${typeof window !== 'undefined' ? window.location.origin : ''}/campaigns/${campaign.slug}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-xs"
