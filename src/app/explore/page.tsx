@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { mockCampaigns, categories } from "@/data/mock-campaigns";
 import CampaignGrid from "@/components/campaigns/CampaignGrid";
@@ -21,6 +21,50 @@ function ExploreContent() {
   const [selectedCategory, setSelectedCategory] = useState<CampaignCategory | "all">(initialCategory);
   const [sortBy, setSortBy] = useState<SortOption>("trending");
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [dbCampaigns, setDbCampaigns] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (selectedCategory !== "all") params.set("category", selectedCategory);
+    if (searchQuery.trim()) params.set("q", searchQuery.trim());
+    if (sortBy) params.set("sort", sortBy);
+
+    setLoading(true);
+    fetch(`/api/campaigns?${params.toString()}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.campaigns && data.campaigns.length > 0) {
+          const mapped = data.campaigns.map((c: any) => ({
+            id: c.id,
+            slug: c.slug,
+            title: c.title,
+            shortPitch: c.tagline || c.description,
+            category: c.category,
+            stage: c.stage,
+            fundingModel: c.fundingModel,
+            goalAmount: c.goalAmount,
+            raisedAmount: c.raisedAmount,
+            backersCount: c.backerCount || 0,
+            daysLeft: Math.max(0, Math.ceil((new Date(c.endsAt).getTime() - Date.now()) / (1000 * 60 * 60 * 24))),
+            coverImage: c.coverImage,
+            location: c.location,
+            dpiitRecognized: c.dpiitRecognized,
+            isStaffPick: c.isStaffPick,
+            creator: {
+              name: c.creator?.name || "Founder",
+              avatar: c.creator?.avatar || "https://api.dicebear.com/7.x/initials/svg?seed=Founder",
+              isKycVerified: c.creator?.isKycVerified ?? true,
+            },
+          }));
+          setDbCampaigns(mapped);
+        } else {
+          setDbCampaigns([]);
+        }
+      })
+      .catch(() => setDbCampaigns([]))
+      .finally(() => setLoading(false));
+  }, [searchQuery, selectedCategory, sortBy]);
 
   const filteredCampaigns = useMemo(() => {
     let result = mockCampaigns;
@@ -58,6 +102,16 @@ function ExploreContent() {
     
     return result;
   }, [searchQuery, selectedCategory, sortBy]);
+
+  const displayCampaigns = useMemo(() => {
+    if (dbCampaigns.length > 0) {
+      if (searchQuery.trim()) return dbCampaigns;
+      const seen = new Set(dbCampaigns.map((c) => c.slug));
+      const remainingMock = filteredCampaigns.filter((m) => !seen.has(m.slug));
+      return [...dbCampaigns, ...remainingMock];
+    }
+    return filteredCampaigns;
+  }, [dbCampaigns, filteredCampaigns, searchQuery]);
 
   const sortOptions: { value: SortOption; label: string }[] = [
     { value: "trending", label: "Most Popular / Trending" },
@@ -157,7 +211,7 @@ function ExploreContent() {
         {/* Sort & Results Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-200/80 pb-4">
           <div className="text-slate-600 text-sm font-medium">
-            Showing <span className="font-bold text-slate-900">{filteredCampaigns.length}</span> {filteredCampaigns.length === 1 ? "project" : "projects"}
+            Showing <span className="font-bold text-slate-900">{displayCampaigns.length}</span> {displayCampaigns.length === 1 ? "project" : "projects"}
             {(selectedCategory !== "all" || searchQuery) && (
               <button 
                 onClick={resetFilters}
@@ -207,8 +261,8 @@ function ExploreContent() {
       </div>
 
       {/* Campaign Grid */}
-      {filteredCampaigns.length > 0 ? (
-        <CampaignGrid campaigns={filteredCampaigns} columns={3} />
+      {displayCampaigns.length > 0 ? (
+        <CampaignGrid campaigns={displayCampaigns as any} columns={3} />
       ) : (
         <div className="text-center py-16 px-4 bg-slate-50 rounded-3xl border border-slate-200/80 max-w-lg mx-auto w-full">
           <Search className="w-12 h-12 text-slate-300 mx-auto w-full mb-4" />

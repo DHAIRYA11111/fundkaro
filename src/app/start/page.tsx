@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { categories } from "@/data/mock-campaigns";
-import { Check, ChevronRight, ArrowLeft, UploadCloud, Plus, GripVertical, Trash2, Clock, Info } from "lucide-react";
+import { Check, ChevronRight, ArrowLeft, UploadCloud, Plus, GripVertical, Trash2, Clock, Info, Loader2, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 const INDIAN_STATES = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Delhi', 'Jammu & Kashmir', 'Ladakh'];
@@ -10,6 +10,9 @@ const INDIAN_STATES = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 
 export default function StartCampaignPage() {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [createdCampaign, setCreatedCampaign] = useState<{ slug: string; title: string } | null>(null);
 
   const [formData, setFormData] = useState({
     title: "", pitch: "", category: "", city: "", state: "", duration: "30",
@@ -29,8 +32,60 @@ export default function StartCampaignPage() {
 
   const handleNext = () => setStep(prev => prev + 1);
   const handleBack = () => setStep(prev => prev - 1);
-  const handleSubmit = () => {
-    setIsSubmitted(true);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const payload = {
+        title: formData.title || "My New Innovation Campaign",
+        tagline: formData.pitch || "An innovative homegrown Indian startup project.",
+        description: formData.story?.slice(0, 180) || formData.pitch || "Innovative project.",
+        story: formData.story || formData.pitch || "Full story coming soon.",
+        category: formData.category || "hardware",
+        stage: "prototype",
+        fundingModel: formData.fundingModel || "flexible",
+        goalAmount: parseFloat(formData.goal) || 500000,
+        coverImage: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800",
+        location: `${formData.city || "Bengaluru"}, ${formData.state || "Karnataka"}`,
+        durationDays: parseInt(formData.duration) || 30,
+        dpiitRecognized: !!formData.dpiit,
+        dpiitNumber: formData.dpiit || undefined,
+        tags: [formData.category || "startup", "innovation", "india"],
+        rewards: rewards
+          .filter((r) => r.title && r.amount)
+          .map((r) => ({
+            title: r.title,
+            description: r.description || "Reward tier",
+            pledgeAmount: parseFloat(r.amount) || 999,
+            estimatedDelivery: r.delivery || "3 months",
+            totalQuantity: r.limit ? parseInt(r.limit) : null,
+            itemsIncluded: r.items ? r.items.split(",").map((s) => s.trim()) : [],
+          })),
+      };
+
+      const res = await fetch("/api/campaigns", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to publish campaign");
+      }
+
+      setCreatedCampaign({
+        slug: data.campaign.slug,
+        title: data.campaign.title,
+      });
+      setIsSubmitted(true);
+    } catch (err: any) {
+      setSubmitError(err.message || "An unexpected error occurred during submission");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const steps = [
@@ -39,16 +94,33 @@ export default function StartCampaignPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-slate-50 py-20 flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-sm p-8 text-center">
-          <div className="mx-auto w-20 h-20 bg-brand-100 rounded-full flex items-center justify-center mb-6">
-            <Clock className="w-10 h-10 text-brand-600" />
+      <div className="min-h-screen bg-slate-50 py-20 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center border border-slate-100">
+          <div className="mx-auto w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6 shadow-inner">
+            <Check className="w-10 h-10 text-emerald-600" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Under Review</h2>
-          <p className="text-slate-600 mb-8">We&apos;ll notify you within 48 hours once your campaign is approved and ready to launch.</p>
-          <Link href="/creator/dashboard" className="btn-brand-primary w-full py-3 text-sm">
-            Go to Dashboard
-          </Link>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Campaign Published! 🚀</h2>
+          <p className="text-slate-600 mb-2 text-sm">
+            <strong className="text-slate-900">{createdCampaign?.title}</strong> is now live on the FundKaro platform.
+          </p>
+          <p className="text-slate-500 mb-8 text-xs">Your campaign is indexed and ready to accept pledges via RBI-compliant escrow.</p>
+          
+          <div className="space-y-3">
+            {createdCampaign?.slug && (
+              <Link 
+                href={`/campaigns/${createdCampaign.slug}`} 
+                className="btn-brand-primary w-full py-3 text-sm shadow-md shadow-brand-500/25"
+              >
+                View Live Campaign Page
+              </Link>
+            )}
+            <Link 
+              href="/creator/dashboard" 
+              className="btn-brand-secondary w-full py-3 text-sm"
+            >
+              Go to Creator Studio
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -465,6 +537,13 @@ export default function StartCampaignPage() {
                     </dl>
                   </div>
                 </div>
+
+                {submitError && (
+                  <div className="mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2.5">
+                    <AlertCircle className="w-5 h-5 shrink-0 text-red-500" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
               </div>
             )}
 
@@ -495,11 +574,20 @@ export default function StartCampaignPage() {
               <button 
                 type="button" 
                 onClick={handleSubmit} 
-                disabled={!formData.termsAgreed || !formData.accuracyConfirmed} 
-                className="btn-brand-primary text-base px-8 py-3.5 shadow-lg shadow-brand-500/25 disabled:opacity-50"
+                disabled={!formData.termsAgreed || !formData.accuracyConfirmed || isSubmitting} 
+                className="btn-brand-primary text-base px-8 py-3.5 shadow-lg shadow-brand-500/25 disabled:opacity-50 flex items-center gap-2"
               >
-                <span>Submit Campaign for Review</span>
-                <Check className="w-5 h-5" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Publishing Campaign...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit & Publish Campaign</span>
+                    <Check className="w-5 h-5" />
+                  </>
+                )}
               </button>
             )}
           </div>

@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String
+  email         String     @unique
+  passwordHash  String
+  phone         String?
+  avatar        String?
+  role          String     @default("backer") // "backer", "creator", "admin"
+  panNumber     String?
+  isKycVerified Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  campaigns     Campaign[]
+  pledges       Pledge[]
+  comments      Comment[]
+}
+
+model Campaign {
+  id                   String           @id @default(cuid())
+  slug                 String           @unique
+  title                String
+  tagline              String
+  description          String
+  story                String
+  category             String           // "hardware", "saas", "ai_ml", "green_energy", "consumer", etc.
+  stage                String           @default("prototype") // "idea", "prototype", "production"
+  fundingModel         String           @default("all_or_nothing") // "all_or_nothing", "flexible"
+  goalAmount           Float
+  raisedAmount         Float            @default(0)
+  backerCount          Int              @default(0)
+  currency             String           @default("INR")
+  status               String           @default("active") // "draft", "pending_review", "active", "funded", "failed"
+  coverImage           String
+  galleryImages        String           @default("[]") // JSON stringified array of image URLs
+  videoUrl             String?
+  location             String           @default("Bengaluru, Karnataka")
+  dpiitRecognized      Boolean          @default(false)
+  dpiitNumber          String?
+  gstNumber            String?
+  bankAccountVerified  Boolean          @default(false)
+  isStaffPick          Boolean          @default(false)
+  isTrending           Boolean          @default(false)
+  tags                 String           @default("[]") // JSON stringified array of strings
+  faq                  String           @default("[]") // JSON stringified array of { question, answer }
+  startsAt             DateTime         @default(now())
+  endsAt               DateTime
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  creatorId            String
+  creator              User             @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  rewards              RewardTier[]
+  pledges              Pledge[]
+  updates              CampaignUpdate[]
+  comments             Comment[]
+}
+
+model RewardTier {
+  id                String    @id @default(cuid())
+  campaignId        String
+  title             String
+  description       String
+  pledgeAmount      Float
+  estimatedDelivery String
+  totalQuantity     Int?      // null = unlimited
+  claimedQuantity   Int       @default(0)
+  isLimited         Boolean   @default(false)
+  itemsIncluded     String    @default("[]") // JSON stringified array of items
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  campaign          Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  pledges           Pledge[]
+}
+
+model Pledge {
+  id                String      @id @default(cuid())
+  campaignId        String
+  backerId          String
+  rewardTierId      String?
+  amount            Float
+  tipAmount         Float       @default(0)
+  paymentStatus     String      @default("PENDING") // "PENDING", "SUCCESS", "FAILED", "REFUNDED"
+  paymentMethod     String?     // "upi", "card", "netbanking"
+  razorpayOrderId   String      @unique
+  razorpayPaymentId String?     @unique
+  isAnonymous       Boolean     @default(false)
+  shippingAddress   String?     // JSON stringified address
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  campaign          Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  backer            User        @relation(fields: [backerId], references: [id], onDelete: Cascade)
+  rewardTier        RewardTier? @relation(fields: [rewardTierId], references: [id], onDelete: SetNull)
+}
+
+model CampaignUpdate {
+  id           String    @id @default(cuid())
+  campaignId   String
+  title        String
+  content      String
+  isBackerOnly Boolean   @default(false)
+  publishedAt  DateTime  @default(now())
+
+  campaign     Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id         String    @id @default(cuid())
+  campaignId String
+  userId     String
+  content    String
+  parentId   String?
+  isPinned   Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+
+  campaign   Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

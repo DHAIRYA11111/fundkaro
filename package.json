@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:use-postgres": "cp prisma/schema.postgresql.prisma prisma/schema.prisma && npx prisma db push",
+    "db:use-sqlite": "cp prisma/schema.sqlite.prisma prisma/schema.prisma && npx prisma db push"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
