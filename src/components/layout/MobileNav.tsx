@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { X, Rocket, Compass, HelpCircle, PlusCircle, LayoutDashboard, UserCheck, LogIn, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ChandaDedoLogo from "@/components/brand/ChandaDedoLogo";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -54,14 +55,9 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-slate-100">
-              <Link href="/" className="flex items-center gap-2.5" onClick={onClose}>
-                <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
-                  <Rocket className="h-4 w-4" />
-                </div>
-                <span className="font-bold text-lg text-slate-900">
-                  Chanda<span className="text-brand-600">Dedo</span>
-                </span>
-              </Link>
+              <div onClick={onClose}>
+                <ChandaDedoLogo size="sm" />
+              </div>
               <button
                 onClick={onClose}
                 className="p-2 text-slate-500 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors"

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Rocket, Globe, Camera, Mail } from "lucide-react";
+import { Globe, Camera, Mail } from "lucide-react";
+import ChandaDedoLogo from "@/components/brand/ChandaDedoLogo";
 
 export default function Footer() {
   return (
@@ -10,14 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Column 1 */}
           <div className="flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-                <Rocket className="h-5 w-5" />
-              </div>
-              <span className="font-extrabold text-2xl text-white tracking-tight">
-                Chanda<span className="text-brand-500">Dedo</span>
-              </span>
-            </Link>
+            <ChandaDedoLogo size="lg" theme="dark" />
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               India&apos;s dedicated rewards-based startup crowdfunding platform. Backing the founders shaping tomorrow.
             </p>

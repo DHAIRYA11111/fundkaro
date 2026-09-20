@@ -14,6 +14,13 @@ export const metadata: Metadata = {
     description: "Indian startup crowdfunding platform to discover and fund innovative ideas.",
     siteName: "ChandaDedo",
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" }
+    ],
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

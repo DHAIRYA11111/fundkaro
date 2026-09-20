@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Rocket, Search, Menu, LayoutDashboard, UserCheck, ChevronDown, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MobileNav from "./MobileNav";
+import ChandaDedoLogo from "@/components/brand/ChandaDedoLogo";
 
 interface SessionUser {
   id: string;
@@ -81,20 +82,8 @@ export default function Navbar() {
       >
         <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-              <Rocket className="h-5 w-5 fill-white/20" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-xl text-slate-900 tracking-tight leading-none">
-                Chanda<span className="text-brand-600">Dedo</span>
-              </span>
-              <span className="text-[10px] font-semibold text-slate-500 tracking-widest uppercase mt-0.5">
-                Fund Indian Dreams
-              </span>
-            </div>
-          </Link>
+          {/* ChandaDedo Bespoke Brand Logo */}
+          <ChandaDedoLogo size="md" />
 
           {/* Desktop Search Bar */}
           <form 
