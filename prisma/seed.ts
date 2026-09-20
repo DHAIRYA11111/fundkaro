@@ -4,18 +4,18 @@ import { hashPassword } from "../src/lib/auth";
 const db = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Seeding FundKaro database...");
+  console.log("🌱 Seeding ChandaDedo database...");
 
   // Create demo users
   const creatorPassword = await hashPassword("Creator@1234");
   const backerPassword = await hashPassword("Backer@1234");
 
   const creator = await db.user.upsert({
-    where: { email: "arjun@fundkaro.in" },
+    where: { email: "arjun@chandadedo.in" },
     update: {},
     create: {
       name: "Arjun Mehta",
-      email: "arjun@fundkaro.in",
+      email: "arjun@chandadedo.in",
       passwordHash: creatorPassword,
       role: "creator",
       phone: "+91 98765 43210",
@@ -26,11 +26,11 @@ async function main() {
   });
 
   const creator2 = await db.user.upsert({
-    where: { email: "priya@fundkaro.in" },
+    where: { email: "priya@chandadedo.in" },
     update: {},
     create: {
       name: "Priya Sharma",
-      email: "priya@fundkaro.in",
+      email: "priya@chandadedo.in",
       passwordHash: creatorPassword,
       role: "creator",
       phone: "+91 87654 32109",
@@ -40,11 +40,11 @@ async function main() {
   });
 
   const backer = await db.user.upsert({
-    where: { email: "ravi@fundkaro.in" },
+    where: { email: "ravi@chandadedo.in" },
     update: {},
     create: {
       name: "Ravi Kumar",
-      email: "ravi@fundkaro.in",
+      email: "ravi@chandadedo.in",
       passwordHash: backerPassword,
       role: "backer",
       avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Ravi+Kumar",
@@ -161,8 +161,8 @@ async function main() {
   });
 
   console.log("✅ Seed complete!");
-  console.log("   Creator login: arjun@fundkaro.in / Creator@1234");
-  console.log("   Backer login:  ravi@fundkaro.in  / Backer@1234");
+  console.log("   Creator login: arjun@chandadedo.in / Creator@1234");
+  console.log("   Backer login:  ravi@chandadedo.in  / Backer@1234");
 }
 
 main()

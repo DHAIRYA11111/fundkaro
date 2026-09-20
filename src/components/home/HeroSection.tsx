@@ -61,7 +61,7 @@ export function HeroSection() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100/80 border border-brand-200/70 text-brand-800 font-semibold text-xs md:text-sm mb-6 shadow-xs">
               <Rocket size={15} className="text-brand-600" />
-              <span>India&apos;s #1 Startup Crowdfunding Platform</span>
+              <span>ChandaDedo — India&apos;s Startup Crowdfunding Platform</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 tracking-tight leading-tight">

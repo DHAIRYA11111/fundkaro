@@ -58,7 +58,9 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
                   <Rocket className="h-4 w-4" />
                 </div>
-                <span className="font-bold text-lg text-slate-900">ChandaDedo</span>
+                <span className="font-bold text-lg text-slate-900">
+                  Chanda<span className="text-brand-600">Dedo</span>
+                </span>
               </Link>
               <button
                 onClick={onClose}

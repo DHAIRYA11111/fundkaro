@@ -88,10 +88,10 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="font-extrabold text-xl text-slate-900 tracking-tight leading-none">
-                Fund<span className="text-brand-600">Karo</span>
+                Chanda<span className="text-brand-600">Dedo</span>
               </span>
               <span className="text-[10px] font-semibold text-slate-500 tracking-widest uppercase mt-0.5">
-                India Innovates
+                Fund Indian Dreams
               </span>
             </div>
           </Link>

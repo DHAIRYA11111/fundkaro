@@ -14,7 +14,9 @@ export default function Footer() {
               <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
                 <Rocket className="h-5 w-5" />
               </div>
-              <span className="font-extrabold text-2xl text-white tracking-tight">ChandaDedo</span>
+              <span className="font-extrabold text-2xl text-white tracking-tight">
+                Chanda<span className="text-brand-500">Dedo</span>
+              </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               India&apos;s dedicated rewards-based startup crowdfunding platform. Backing the founders shaping tomorrow.
