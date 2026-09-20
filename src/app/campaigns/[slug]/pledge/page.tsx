@@ -2,9 +2,10 @@
 
 import { useState, Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
+import Script from "next/script";
 import { mockCampaigns } from "@/data/mock-campaigns";
 import { formatINR } from "@/lib/utils";
-import { ChevronRight, ArrowLeft, Plus, CreditCard, Smartphone, CheckCircle, Share2, Landmark, ShieldCheck, QrCode, Lock, Check } from "lucide-react";
+import { ChevronRight, ArrowLeft, Plus, CreditCard, Smartphone, CheckCircle, Share2, Landmark, ShieldCheck, QrCode, Lock, Check, Loader2, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -37,6 +38,16 @@ function PledgeContent() {
   const [cardCvv, setCardCvv] = useState("");
   const [selectedBank, setSelectedBank] = useState("HDFC");
 
+  // Real backend checkout state
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [confirmedReceipt, setConfirmedReceipt] = useState<{
+    transactionId: string;
+    orderId: string;
+    amount: number;
+    paymentMethod: string;
+  } | null>(null);
+
   if (!campaign) {
     return <div className="text-center py-20 text-slate-600">Campaign not found</div>;
   }
@@ -47,6 +58,115 @@ function PledgeContent() {
   const baseAmount = selectedReward ? selectedReward.pledgeAmount : (parseInt(customPledge) || 0);
   const totalAmount = baseAmount + (parseInt(extraSupport) || 0);
 
+  const processPledgePayment = async () => {
+    try {
+      setIsProcessing(true);
+      setPaymentError(null);
+
+      // Step 1: Create Order via Backend API
+      const orderRes = await fetch("/api/payments/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          campaignId: campaign.id || campaign.slug,
+          rewardTierId: selectedRewardId === "none" ? undefined : selectedRewardId,
+          amount: baseAmount,
+          tipAmount: parseInt(extraSupport) || 0,
+          isAnonymous: false,
+        }),
+      });
+
+      const orderData = await orderRes.json();
+      if (!orderRes.ok) {
+        throw new Error(orderData.error || "Failed to initialize payment");
+      }
+
+      // Step 2: Handle Razorpay modal or sandbox completion
+      if (
+        typeof window !== "undefined" &&
+        (window as any).Razorpay &&
+        orderData.keyId &&
+        !orderData.orderId.startsWith("order_sandbox_")
+      ) {
+        const options = {
+          key: orderData.keyId,
+          amount: orderData.amount,
+          currency: orderData.currency || "INR",
+          name: "FundKaro",
+          description: `Pledge for ${campaign.title}`,
+          order_id: orderData.orderId,
+          prefill: {
+            name: shipping.fullName || orderData.userName || "Backer",
+            email: orderData.userEmail || "backer@fundkaro.in",
+            contact: shipping.phone || "9876543210",
+          },
+          theme: { color: "#ea580c" },
+          handler: async function (response: any) {
+            await verifyAndConfirmPayment({
+              razorpayOrderId: response.razorpay_order_id || orderData.orderId,
+              razorpayPaymentId: response.razorpay_payment_id || `pay_${Date.now()}`,
+              razorpaySignature: response.razorpay_signature || "sig_valid",
+            });
+          },
+          modal: {
+            ondismiss: function () {
+              setIsProcessing(false);
+            },
+          },
+        };
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+      } else {
+        // Test / Sandbox direct confirmation
+        await verifyAndConfirmPayment({
+          razorpayOrderId: orderData.orderId,
+          razorpayPaymentId: `pay_sandbox_${Date.now().toString(36)}`,
+          razorpaySignature: "sandbox_valid_sig",
+        });
+      }
+    } catch (err: any) {
+      console.error("Payment initiation failed:", err);
+      setPaymentError(err.message || "Payment could not be processed. Please try again.");
+      setIsProcessing(false);
+    }
+  };
+
+  const verifyAndConfirmPayment = async (details: {
+    razorpayOrderId: string;
+    razorpayPaymentId: string;
+    razorpaySignature: string;
+  }) => {
+    try {
+      const verifyRes = await fetch("/api/payments/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...details,
+          paymentMethod,
+        }),
+      });
+
+      const verifyData = await verifyRes.json();
+      if (!verifyRes.ok) {
+        throw new Error(verifyData.error || "Payment verification failed");
+      }
+
+      setConfirmedReceipt({
+        transactionId: details.razorpayPaymentId,
+        orderId: details.razorpayOrderId,
+        amount: totalAmount,
+        paymentMethod,
+      });
+
+      setIsProcessing(false);
+      setStep(4);
+    } catch (err: any) {
+      console.error("Verification failed:", err);
+      setPaymentError(err.message || "Payment verification failed");
+      setIsProcessing(false);
+    }
+  };
+
   const handleNext = () => {
     if (step === 1 && requiresShipping) {
       setStep(2);
@@ -55,7 +175,7 @@ function PledgeContent() {
     } else if (step === 2) {
       setStep(3);
     } else if (step === 3) {
-      setStep(4);
+      processPledgePayment();
     }
   };
 
@@ -69,6 +189,7 @@ function PledgeContent() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-10">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       <div className="max-w-3xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         
         {/* Header & Progress */}
@@ -486,6 +607,13 @@ function PledgeContent() {
               </p>
             </div>
 
+            {paymentError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-center gap-2 text-sm">
+                <AlertCircle className="w-5 h-5 shrink-0 text-red-500" />
+                <span>{paymentError}</span>
+              </div>
+            )}
+
             <div className="text-xs text-slate-500 pt-1">
               By confirming, you agree to FundKaro&apos;s <Link href="/terms" className="text-brand-600 font-semibold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-brand-600 font-semibold hover:underline">Privacy Policy</Link>.
             </div>
@@ -494,17 +622,28 @@ function PledgeContent() {
               <button 
                 type="button" 
                 onClick={handleBack} 
-                className="btn-brand-secondary text-sm px-6 py-2.5 w-full sm:w-auto"
+                disabled={isProcessing}
+                className="btn-brand-secondary text-sm px-6 py-2.5 w-full sm:w-auto disabled:opacity-50"
               >
                 <ArrowLeft className="w-4 h-4" /> Back
               </button>
               <button 
                 type="button" 
                 onClick={handleNext} 
-                className="btn-brand-primary text-base py-3.5 px-8 shadow-lg shadow-brand-500/25 w-full sm:w-auto"
+                disabled={isProcessing || totalAmount <= 0}
+                className="btn-brand-primary text-base py-3.5 px-8 shadow-lg shadow-brand-500/25 w-full sm:w-auto disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                <span>Authorize Pledge — {formatINR(totalAmount)}</span>
-                <Check className="w-5 h-5" />
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Processing Escrow Pledge...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Authorize Pledge — {formatINR(totalAmount)}</span>
+                    <Check className="w-5 h-5" />
+                  </>
+                )}
               </button>
             </div>
           </motion.div>
@@ -536,15 +675,21 @@ function PledgeContent() {
               <div className="p-6 space-y-3.5">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Transaction ID</span>
-                  <span className="font-mono font-semibold text-slate-900">FK-8492015</span>
+                  <span className="font-mono font-semibold text-slate-900 truncate max-w-[200px]">{confirmedReceipt?.transactionId || "FK-" + Math.random().toString(36).substring(2, 9).toUpperCase()}</span>
                 </div>
+                {confirmedReceipt?.orderId && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-500">Order ID</span>
+                    <span className="font-mono text-xs text-slate-700 truncate max-w-[200px]">{confirmedReceipt.orderId}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Amount Pledged</span>
-                  <span className="font-extrabold text-slate-900 text-base">{formatINR(totalAmount)}</span>
+                  <span className="font-extrabold text-slate-900 text-base">{formatINR(confirmedReceipt?.amount || totalAmount)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Payment Channel</span>
-                  <span className="font-semibold text-slate-900 uppercase">{paymentMethod}</span>
+                  <span className="font-semibold text-slate-900 uppercase">{confirmedReceipt?.paymentMethod || paymentMethod}</span>
                 </div>
                 <div className="flex justify-between text-sm pt-2 border-t border-slate-100">
                   <span className="text-slate-500">Reward Tier</span>
