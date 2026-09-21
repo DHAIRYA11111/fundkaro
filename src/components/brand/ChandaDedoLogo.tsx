@@ -7,14 +7,20 @@ import { cn } from "@/lib/utils";
 interface ChandaDedoLogoProps {
   className?: string;
   size?: "sm" | "md" | "lg" | "xl";
-  variant?: "full" | "icon" | "stacked";
+  variant?: "full" | "icon";
   theme?: "light" | "dark";
   href?: string;
 }
 
+/**
+ * World-class bespoke icon mark for ChandaDedo.
+ * Clean, iconic, modern geometric silhouette:
+ * An interlocking ascending community loop & launch spark in crisp white
+ * against a radiant saffron squircle. Scalable from 16px to 512px.
+ */
 export function ChandaDedoIconMark({
   className,
-  size = 38,
+  size = 36,
 }: {
   className?: string;
   size?: number;
@@ -23,63 +29,57 @@ export function ChandaDedoIconMark({
     <div
       style={{ width: size, height: size }}
       className={cn(
-        "relative rounded-2xl p-[1.5px] bg-gradient-to-br from-orange-500 via-amber-400 to-rose-600 shadow-lg shadow-orange-500/25 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1",
+        "relative rounded-xl overflow-hidden shadow-sm shrink-0 transition-all duration-200 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-orange-500/20",
         className
       )}
     >
-      {/* Inner background with subtle dark mesh */}
-      <div className="w-full h-full rounded-[14px] bg-gradient-to-b from-slate-900 via-slate-950 to-neutral-900 flex items-center justify-center relative overflow-hidden">
-        {/* Glow orb in corner */}
-        <div className="absolute -top-3 -right-3 w-7 h-7 rounded-full bg-orange-400/40 blur-md pointer-events-none" />
-        <div className="absolute -bottom-3 -left-3 w-7 h-7 rounded-full bg-amber-400/30 blur-md pointer-events-none" />
+      <svg
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full"
+      >
+        <defs>
+          {/* Vibrant, warm Indian saffron gradient */}
+          <linearGradient id="cd-bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FF5500" />
+            <stop offset="100%" stopColor="#FF7A00" />
+          </linearGradient>
 
-        {/* Custom Bespoke ChandaDedo Geometric SVG Glyph */}
-        <svg
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-[72%] h-[72%] relative z-10 drop-shadow-[0_2px_8px_rgba(249,115,22,0.5)]"
-        >
-          <defs>
-            <linearGradient id="cd-primary-grad" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#FB923C" />
-              <stop offset="50%" stopColor="#F97316" />
-              <stop offset="100%" stopColor="#DC2626" />
-            </linearGradient>
-            <linearGradient id="cd-accent-grad" x1="16" y1="4" x2="16" y2="28" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#FDE047" />
-              <stop offset="100%" stopColor="#F59E0B" />
-            </linearGradient>
-            <linearGradient id="cd-glow" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
-            </linearGradient>
-          </defs>
+          {/* Subtle inner highlight */}
+          <linearGradient id="cd-highlight" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#000000" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
 
-          {/* Ascending Rupee / Spark Origami Wings */}
-          {/* Left Wing - Dynamic stylized C wing */}
+        {/* Base Squircle */}
+        <rect width="40" height="40" rx="11" fill="url(#cd-bg)" />
+        <rect width="40" height="40" rx="11" fill="url(#cd-highlight)" />
+
+        {/* Clean, iconic white vector mark:
+            - Left sweeping curve (The "C" of Chanda / Giving hand)
+            - Right ascending wing (The "D" of Dedo / Growth rocket)
+            - Central 4-point catalyst spark
+        */}
+        <g transform="translate(1, 1)">
+          {/* Left arc (C-curve) */}
           <path
-            d="M8 22C6.5 19 6.5 13 11 8.5C14.5 5 20.5 4.5 24 7L20.5 10.5C18.5 9 15 9.5 13 11.5C10.5 14 10.5 18 11.8 20.2L8 22Z"
-            fill="url(#cd-primary-grad)"
-          />
-
-          {/* Right Ascending Wing - Launch Vector */}
-          <path
-            d="M24 10C25.5 13 25.5 19 21 23.5C17.5 27 11.5 27.5 8 25L11.5 21.5C13.5 23 17 22.5 19 20.5C21.5 18 21.5 14 20.2 11.8L24 10Z"
-            fill="url(#cd-accent-grad)"
-          />
-
-          {/* Central Ascending Diamond Spark (Represents the Funding Catalyst) */}
-          <path
-            d="M16 8L18.2 13.8L24 16L18.2 18.2L16 24L13.8 18.2L8 16L13.8 13.8L16 8Z"
+            d="M10 20C10 14.477 14.477 10 20 10C22.4 10 24.58 10.85 26.28 12.27L23.4 15.15C22.45 14.43 21.28 14 20 14C16.686 14 14 16.686 14 20C14 23.314 16.686 26 20 26C21.28 26 22.45 25.57 23.4 24.85L26.28 27.73C24.58 29.15 22.4 30 20 30C14.477 30 10 25.523 10 20Z"
             fill="#FFFFFF"
-            className="animate-pulse"
+            fillOpacity="0.95"
           />
 
-          {/* Core Gold Micro-Spark */}
-          <circle cx="16" cy="16" r="2" fill="url(#cd-accent-grad)" />
-        </svg>
-      </div>
+          {/* Ascending Catalyst Spark (Upper Right - Represents funding & growth) */}
+          <path
+            d="M26.5 7L28 11.5L32.5 13L28 14.5L26.5 19L25 14.5L20.5 13L25 11.5L26.5 7Z"
+            fill="#FFFFFF"
+          />
+
+          {/* Center core seed / spark */}
+          <circle cx="20" cy="20" r="2.5" fill="#FFFFFF" fillOpacity="0.9" />
+        </g>
+      </svg>
     </div>
   );
 }
@@ -95,28 +95,24 @@ export default function ChandaDedoLogo({
 
   const sizeConfigs = {
     sm: {
-      iconSize: 30,
+      iconSize: 28,
       textSize: "text-lg",
-      badgeSize: "text-[9px]",
-      subGap: "gap-1.5",
+      gap: "gap-2",
     },
     md: {
-      iconSize: 38,
+      iconSize: 34,
       textSize: "text-xl",
-      badgeSize: "text-[10px]",
-      subGap: "gap-2",
+      gap: "gap-2.5",
     },
     lg: {
-      iconSize: 46,
+      iconSize: 42,
       textSize: "text-2xl",
-      badgeSize: "text-[11px]",
-      subGap: "gap-2.5",
+      gap: "gap-3",
     },
     xl: {
-      iconSize: 56,
+      iconSize: 52,
       textSize: "text-3xl",
-      badgeSize: "text-xs",
-      subGap: "gap-3",
+      gap: "gap-3.5",
     },
   };
 
@@ -125,55 +121,46 @@ export default function ChandaDedoLogo({
   const content = (
     <div
       className={cn(
-        "flex items-center group cursor-pointer select-none",
-        current.subGap,
+        "inline-flex items-center group select-none tracking-tight",
+        current.gap,
         className
       )}
     >
-      {/* Bespoke Icon Mark */}
+      {/* Crisp Icon Mark */}
       <ChandaDedoIconMark size={current.iconSize} />
 
-      {/* Typography & Subtitle */}
+      {/* Typography: Clean, confident, zero gimmicks or green dots */}
       {variant !== "icon" && (
-        <div className="flex flex-col justify-center">
-          <div className="flex items-center gap-1.5 leading-none">
-            <span
-              className={cn(
-                "font-black tracking-tight flex items-baseline font-sans",
-                current.textSize,
-                isDark ? "text-white" : "text-slate-900"
-              )}
-            >
-              Chanda
-              <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-rose-600 bg-clip-text text-transparent font-extrabold ml-[1px]">
-                Dedo
-              </span>
-            </span>
-
-            {/* Micro Sparkle Indicator */}
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-ping ml-0.5" />
-          </div>
-
-          {/* Subline Branding */}
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <span
-              className={cn(
-                "font-bold uppercase tracking-[0.22em]",
-                current.badgeSize,
-                isDark ? "text-slate-400" : "text-slate-500"
-              )}
-            >
-              Venture Crowdfund
-            </span>
-            <span className="text-[10px] text-orange-500/80 font-mono">🇮🇳</span>
-          </div>
+        <div className="flex items-baseline font-sans font-extrabold leading-none">
+          <span
+            className={cn(
+              "tracking-tight",
+              current.textSize,
+              isDark ? "text-white" : "text-slate-900"
+            )}
+          >
+            Chanda
+          </span>
+          <span
+            className={cn(
+              "font-black ml-0.5 tracking-tight",
+              current.textSize,
+              "text-orange-600"
+            )}
+          >
+            Dedo
+          </span>
         </div>
       )}
     </div>
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return (
+      <Link href={href} className="inline-flex items-center">
+        {content}
+      </Link>
+    );
   }
 
   return content;

@@ -59,15 +59,11 @@ export function HeroSection() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center"
           >
-            {/* Premium ChandaDedo Brand Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 via-amber-500/15 to-rose-500/10 border border-orange-200/80 text-orange-950 font-semibold text-xs md:text-sm mb-6 shadow-xs backdrop-blur-sm">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-600"></span>
-              </span>
-              <span className="font-bold text-orange-900">ChandaDedo</span>
+            {/* Clean, Refined Brand Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200/80 text-orange-900 font-semibold text-xs md:text-sm mb-6">
+              <span className="font-bold text-orange-600">ChandaDedo</span>
               <span className="text-orange-300">•</span>
-              <span className="text-slate-700">Backing India&apos;s Next Generation of Founders</span>
+              <span className="text-slate-600">India&apos;s Startup Crowdfunding Platform</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1]">
